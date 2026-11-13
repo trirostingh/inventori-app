@@ -16,19 +16,22 @@
       background-color: #f0f4f8;
     }
 
-    /* Cover Halaman Login Full-Screen Merata */
-#auth-container {
-  min-height: 100vh;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-box {
-  padding: 20px 28px !important;
-  max-width: 420px;
-}
+/* Cover Halaman Login Full-Screen Merata */
+    #auth-container {
+      min-height: 100vh !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      margin: 0 !important;
+      padding: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background-image: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.45)), url('bg-login.jpg') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      box-sizing: border-box !important;
+    }
 
     /* Kartu Form Login di Tengah */
     .login-card {
@@ -98,11 +101,11 @@
       <form id="login-form" style="background: transparent; border: none; padding: 0; margin: 0;">
         <div class="form-group" style="margin-bottom: 13px;">
           <label for="login-email">Email Pengguna</label>
-          <input type="email" id="login-email" placeholder="admin1@inventori.com" required>
+          <input type="email" id="login-email" placeholder="Masukkan email pengguna" required>
         </div>
         <div class="form-group" style="margin-bottom: 16px;">
           <label for="login-password">Password</label>
-          <input type="password" id="login-password" placeholder="******" required>
+          <input type="password" id="login-password" placeholder="Masukkan password" required>
         </div>
         <button type="submit" style="width: 100%; padding: 11px; font-size: 1rem; font-weight: bold;">Masuk ke Aplikasi</button>
         <p id="auth-error" class="error-msg" style="margin-top: 10px; text-align: center;"></p>
