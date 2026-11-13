@@ -17,24 +17,18 @@
     }
 
     /* Cover Halaman Login Full-Screen Merata */
-    #auth-container {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      max-width: none !important;
-      margin: 0 !important;
-      background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(2, 102, 133, 0.2)), url('bg-login.jpg') no-repeat center center !important;
-      background-size: cover !important;
-      display: flex !important;
-      justify-content: center !important;
-      align-items: center !important;
-      padding: 20px 16px !important;
-      box-sizing: border-box !important;
-      z-index: 99999 !important;
-      overflow-y: auto !important;
-    }
+#auth-container {
+  min-height: 100vh;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  padding: 20px 28px !important;
+  max-width: 420px;
+}
 
     /* Kartu Form Login di Tengah */
     .login-card {
@@ -113,21 +107,6 @@
         <button type="submit" style="width: 100%; padding: 11px; font-size: 1rem; font-weight: bold;">Masuk ke Aplikasi</button>
         <p id="auth-error" class="error-msg" style="margin-top: 10px; text-align: center;"></p>
       </form>
-
-      <!-- Informasi Akun Uji Coba -->
-      <div style="margin-top: 16px; padding: 12px 14px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.81rem; color: #334155;">
-        <strong style="color: #026685; display: block; margin-bottom: 4px;">ℹ️ Informasi Akun Pengujian Sistem:</strong>
-        <ul style="margin: 0; padding-left: 18px; line-height: 1.5;">
-          <li><strong>Admin Pusat:</strong> <code>admin2@inventori.com</code>
-          <li><strong>Cabang 1:</strong> <code>cabang1@inventori.com</code></li>
-          <li><strong>Cabang 2:</strong> <code>cabang2@inventori.com</code></li>
-          <li><strong>Cabang 3:</strong> <code>cabang3@inventori.com</code></li>
-          <li><strong>Cabang 4:</strong> <code>cabang4@inventori.com</code></li>
-        </ul>
-        <p style="margin: 6px 0 0 0; font-size: 0.79rem; color: #475569;">
-          *Password Admin 2 dan Cabang : <strong><code>1234567</code></strong>
-        </p>
-      </div>
     </div>
   </div>
 
