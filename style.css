@@ -1,0 +1,322 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f0f4f8;
+  color:#2d3748;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+#auth-container {
+  max-width: 420px;
+  margin: 60px auto;
+}
+
+/* Header & Profil User */
+.header-app {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.header-app h1 {
+  font-size: 1.6rem;
+  color: #026685;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Kartu Ringkasan Laporan */
+.report-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.card {
+  background: linear-gradient(135deg, #e6f7ff 0%, #ffffff 100%);
+  padding: 20px;
+  border-left: 5px solid #026685;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.card h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #718096;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #026685;
+}
+
+/* Box Peringatan Stok Menipis */
+.alert-box {
+  background-color: #fff9db;
+  border: 1px solid #ffe066;
+  border-left: 6px solid #f59f00;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 35px;
+}
+
+.alert-box h3 {
+  color: #d9480f;
+  margin-bottom: 8px;
+}
+
+.alert-box p {
+  color: #495057;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.supplier-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.supplier-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #f1f3f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.btn-supplier {
+  padding: 6px 12px;
+  margin-left: 6px;
+  font-size: 0.82rem;
+  background-color: #2b8a3e;
+}
+
+.btn-supplier:hover {
+  background-color: #2b7a3e;
+}
+
+/* Tab Navigasi */
+.tabs {
+  display: flex;
+  gap: 15px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 30px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: #718096;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #026685;
+}
+
+.tab-btn.active {
+  color: #026685;
+  border-bottom: 3px solid #026685;
+  background-color: #f7fafc;
+  border-radius: 6px 6px 0 0;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Structure Form Input */
+form {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 35px;
+  background: #f8fafc;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+input, select {
+  padding: 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #026685;
+  box-shadow: 0 0 0 3px rgba(2, 102, 133, 0.15);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+/* Tombol Aksi */
+button {
+  padding: 12px 20px;
+  border: none;
+  background-color: #026685;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #148584;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button.btn-secondary {
+  background-color: #718096;
+}
+
+button.btn-secondary:hover {
+  background-color: #4a5568;
+}
+
+/* Tabel Data */
+h2 {
+  font-size: 1.3rem;
+  color: #1a202c;
+  margin-bottom: 18px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inventory-table th, .inventory-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.inventory-table th {
+  background-color: #026685;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.inventory-table tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.inventory-table tbody tr:hover {
+  background-color: #edf2f7;
+}
+
+/* Label Status Stok & Akses */
+.badge-low {
+  background-color: #e53e3e;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.btn-action {
+  padding: 6px 12px;
+  margin-right: 6px;
+  font-size: 0.82rem;
+}
+
+.btn-edit { 
+  background-color: #d69e2e; 
+}
+
+.btn-edit:hover { 
+  background-color: #b7791f; 
+}
+
+.btn-delete { 
+  background-color: #e53e3e; 
+}
+
+.btn-delete:hover { 
+  background-color: #c53030; 
+}
+
+.error-msg {
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}

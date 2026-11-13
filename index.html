@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Inventori Pusat & Distribusi Cabang - PT. ABC</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Reset total agar halaman merata penuh */
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      overflow-x: hidden;
+      background-color: #f0f4f8;
+    }
+
+    /* Cover Halaman Login Full-Screen Merata */
+    #auth-container {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      margin: 0 !important;
+      background: linear-gradient(rgba(255, 255, 255, 0.15), rgba(2, 102, 133, 0.2)), url('bg-login.jpg') no-repeat center center !important;
+      background-size: cover !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      padding: 20px 16px !important;
+      box-sizing: border-box !important;
+      z-index: 99999 !important;
+      overflow-y: auto !important;
+    }
+
+    /* Kartu Form Login di Tengah */
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 24px 28px;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      margin: auto;
+    }
+
+    .login-brand-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .login-brand-header h2 {
+      margin: 10px 0 2px 0;
+      font-size: 1.6rem;
+      color: #026685;
+      letter-spacing: 0.8px;
+    }
+
+    .login-brand-header .tagline {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #148584;
+      letter-spacing: 0.3px;
+    }
+
+    .login-brand-header .address {
+      margin: 4px 0 0 0;
+      font-size: 0.78rem;
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Form Login -->
+  <div id="auth-container">
+    <div class="login-card">
+      <div class="login-brand-header">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="12" fill="#026685"/>
+          <path d="M18 46L28 18H36L46 46H39L32 25L25 46H18Z" fill="#6CEBF9"/>
+          <rect x="24" y="36" width="16" height="4" rx="2" fill="#FBDF13"/>
+          <circle cx="48" cy="18" r="5" fill="#FCB100"/>
+        </svg>
+        <h2>PT. ABC</h2>
+        <p class="tagline">DISTRIBUTOR ALAT TULIS DAN PERLENGKAPAN KANTOR</p>
+        <p class="address">Jl. Cengkeh V/32, Ciputat</p>
+      </div>
+
+      <h3 style="margin: 0 0 14px 0; color: #1e293b; text-align: center; font-size: 1.05rem;">Login Sistem Inventori</h3>
+      
+      <form id="login-form" style="background: transparent; border: none; padding: 0; margin: 0;">
+        <div class="form-group" style="margin-bottom: 13px;">
+          <label for="login-email">Email Pengguna</label>
+          <input type="email" id="login-email" placeholder="admin1@inventori.com" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="******" required>
+        </div>
+        <button type="submit" style="width: 100%; padding: 11px; font-size: 1rem; font-weight: bold;">Masuk ke Aplikasi</button>
+        <p id="auth-error" class="error-msg" style="margin-top: 10px; text-align: center;"></p>
+      </form>
+
+      <!-- Informasi Akun Uji Coba -->
+      <div style="margin-top: 16px; padding: 12px 14px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.81rem; color: #334155;">
+        <strong style="color: #026685; display: block; margin-bottom: 4px;">ℹ️ Informasi Akun Pengujian Sistem:</strong>
+        <ul style="margin: 0; padding-left: 18px; line-height: 1.5;">
+          <li><strong>Admin Pusat:</strong> <code>admin2@inventori.com</code>
+          <li><strong>Cabang 1:</strong> <code>cabang1@inventori.com</code></li>
+          <li><strong>Cabang 2:</strong> <code>cabang2@inventori.com</code></li>
+          <li><strong>Cabang 3:</strong> <code>cabang3@inventori.com</code></li>
+          <li><strong>Cabang 4:</strong> <code>cabang4@inventori.com</code></li>
+        </ul>
+        <p style="margin: 6px 0 0 0; font-size: 0.79rem; color: #475569;">
+          *Password Admin 2 dan Cabang : <strong><code>1234567</code></strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Area Utama Aplikasi -->
+  <div id="app-container" class="container" style="display: none;">
+    <!-- KOP PERUSAHAAN RESMI -->
+    <div class="company-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px double #026685; padding-bottom: 15px; margin-bottom: 20px; gap: 15px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+          <rect width="64" height="64" rx="12" fill="#026685"/>
+          <path d="M18 46L28 18H36L46 46H39L32 25L25 46H18Z" fill="#6CEBF9"/>
+          <rect x="24" y="36" width="16" height="4" rx="2" fill="#FBDF13"/>
+          <circle cx="48" cy="18" r="5" fill="#FCB100"/>
+        </svg>
+        <div>
+          <h1 style="margin: 0; font-size: 1.5rem; color: #026685; letter-spacing: 0.5px;">PT. ABC</h1>
+          <p style="margin: 2px 0; font-weight: bold; font-size: 0.9rem; color: #148584; letter-spacing: 0.3px;">DISTRIBUTOR ALAT TULIS DAN PERLENGKAPAN KANTOR</p>
+          <p style="margin: 0; font-size: 0.82rem; color: #475569;">Jl. Cengkeh V/32, Ciputat</p>
+        </div>
+      </div>
+
+      <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
+        <span id="user-email-display" style="font-weight: 600; color: #334155;"></span>
+        <button id="btn-logout" class="btn-secondary">Logout</button>
+      </div>
+    </div>
+
+    <!-- Ringkasan Laporan -->
+    <div class="report-cards">
+      <div class="card">
+        <h3 id="lbl-rpt-items">Total Jenis Barang</h3>
+        <p id="rpt-total-items">0</p>
+      </div>
+      <div class="card">
+        <h3 id="lbl-rpt-sold">Total Barang Terjual/Terkirim</h3>
+        <p id="rpt-total-sold">0 Unit</p>
+      </div>
+      <div class="card">
+        <h3 id="lbl-rpt-revenue">Total Nilai Transaksi</h3>
+        <p id="rpt-total-revenue">Rp 0</p>
+      </div>
+    </div>
+
+    <!-- Peringatan Stok Menipis -->
+    <div id="supplier-alert-box" class="alert-box" style="display: none;">
+      <h3>⚠️ Peringatan Stok Hampir Habis!</h3>
+      <p>Beberapa barang stoknya di bawah batas minimal (<= 5). Silakan lakukan pesanan ke Supplier:</p>
+      <div id="supplier-actions" class="supplier-actions"></div>
+    </div>
+
+    <!-- Tab Navigasi -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="tab-inventory">Daftar Inventori Pusat</button>
+      <button class="tab-btn" data-tab="tab-branch-request">Permintaan / Transaksi Cabang</button>
+      <button class="tab-btn" data-tab="tab-transactions">Riwayat Transaksi</button>
+      <button class="tab-btn admin-only" data-tab="tab-logs" style="display: none;">Log Audit</button>
+      <button class="tab-btn admin-only" data-tab="tab-users" style="display: none;">Daftar User</button>
+    </div>
+
+    <!-- TAB 1: INVENTORI PUSAT -->
+    <div id="tab-inventory" class="tab-content active">
+      <form id="inventory-form" style="display: none;">
+        <h3>Tambah / Edit Barang Pusat</h3>
+        <input type="hidden" id="item-id">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="item-group">Pilih Jenis Barang & Varian</label>
+            <select id="item-group" required>
+              <option value="">-- Pilih Jenis & Varian Barang --</option>
+              
+              <optgroup label="Pulpen (PLP)">
+                <option value="PLP-001|Pulpen 0.3|ATK|3500">PLP-001 - Pulpen 0.3 (Rp 3.500)</option>
+                <option value="PLP-002|Pulpen 0.5|ATK|5000">PLP-002 - Pulpen 0.5 (Rp 5.000)</option>
+                <option value="PLP-003|Pulpen Gel 0.7|ATK|7000">PLP-003 - Pulpen Gel 0.7 (Rp 7.000)</option>
+              </optgroup>
+
+              <optgroup label="Pensil (PNS)">
+                <option value="PNS-001|Pensil 2B|ATK|4000">PNS-001 - Pensil 2B (Rp 4.000)</option>
+                <option value="PNS-002|Pensil 4B|ATK|5000">PNS-002 - Pensil 4B (Rp 5.000)</option>
+                <option value="PNS-003|Pensil 8B|ATK|7500">PNS-003 - Pensil 8B (Rp 7.500)</option>
+              </optgroup>
+
+              <optgroup label="Buku Tulis (BKT)">
+                <option value="BKT-038|Buku Tulis 38 Lembar|ATK|3500">BKT-038 - Buku Tulis 38 Lembar (Rp 3.500)</option>
+                <option value="BKT-050|Buku Tulis 50 Lembar|ATK|5000">BKT-050 - Buku Tulis 50 Lembar (Rp 5.000)</option>
+                <option value="BKT-100|Buku Tulis 100 Lembar|ATK|9500">BKT-100 - Buku Tulis 100 Lembar (Rp 9.500)</option>
+              </optgroup>
+
+              <optgroup label="Buku Gambar (BKG)">
+                <option value="BKG-A4|Buku Gambar A4|ATK|6000">BKG-A4 - Buku Gambar A4 (Rp 6.000)</option>
+                <option value="BKG-A3|Buku Gambar A3|ATK|12000">BKG-A3 - Buku Gambar A3 (Rp 12.000)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="item-code">Kode Barang</label>
+            <input type="text" id="item-code" readonly placeholder="Otomatis" style="background-color: #edf2f7;">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="item-name">Nama / Varian Barang</label>
+            <input type="text" id="item-name" readonly placeholder="Otomatis dari pilihan" style="background-color: #edf2f7;">
+          </div>
+          <div class="form-group">
+            <label for="item-category">Kategori</label>
+            <input type="text" id="item-category" readonly placeholder="Otomatis" style="background-color: #edf2f7;">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="item-price">Harga Satuan (Rp)</label>
+            <input type="number" id="item-price" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="item-stock">Jumlah Stok</label>
+            <input type="number" id="item-stock" placeholder="0" min="0" required>
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <button type="submit" id="btn-submit">Simpan Barang</button>
+          <button type="button" id="btn-cancel" class="btn-secondary" style="display: none;">Batal Edit</button>
+        </div>
+      </form>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="margin: 0;">Stok Barang Tersedia</h2>
+        <button type="button" id="btn-print-stock" class="admin-only" style="display: none; background-color: #026685;">
+          🖨️ Cetak PDF Stok Barang (A4)
+        </button>
+      </div>
+
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Kode</th>
+            <th>Nama Barang</th>
+            <th>Kategori</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th>Tgl Update</th>
+            <th id="action-header">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="inventory-list"></tbody>
+      </table>
+    </div>
+
+    <!-- TAB 2: PERMINTAAN CABANG -->
+    <div id="tab-branch-request" class="tab-content">
+      <h2>Form Permintaan Barang dari Cabang</h2>
+      <form id="branch-form">
+        <div class="form-row">
+          <div class="form-group" id="branch-select-group">
+            <label for="branch-select">Pilih Cabang</label>
+            <select id="branch-select">
+              <option value="">-- Pilih Cabang --</option>
+              <option value="Cabang 1">Cabang 1</option>
+              <option value="Cabang 2">Cabang 2</option>
+              <option value="Cabang 3">Cabang 3</option>
+              <option value="Cabang 4">Cabang 4</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="branch-display-group" style="display: none;">
+            <label>Cabang Anda</label>
+            <input type="text" id="branch-display-name" readonly style="background-color: #edf2f7; font-weight: bold; color: #026685;">
+          </div>
+
+          <div class="form-group">
+            <label for="item-select">Pilih Barang</label>
+            <select id="item-select" required>
+              <option value="">-- Pilih Barang --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="request-qty">Kuantitas (Qty)</label>
+            <input type="number" id="request-qty" placeholder="1" min="1" value="1" required>
+          </div>
+          <div class="form-group">
+            <label for="display-price">Harga Satuan</label>
+            <input type="text" id="display-price" value="Rp 0" readonly style="background-color: #edf2f7;">
+          </div>
+          <div class="form-group">
+            <label for="display-total">Total Harga</label>
+            <input type="text" id="display-total" value="Rp 0" readonly style="background-color: #edf2f7; font-weight: bold;">
+          </div>
+        </div>
+
+        <button type="submit">Kirim Permintaan / Kurangi Stok</button>
+      </form>
+    </div>
+
+    <!-- TAB 3: RIWAYAT TRANSAKSI -->
+    <div id="tab-transactions" class="tab-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+        <h2 id="transactions-title" style="margin: 0;">Laporan Transaksi Ke Cabang</h2>
+        <button type="button" id="btn-print-transactions" style="background-color: #026685;">
+          🖨️ Cetak PDF Laporan Transaksi (A4)
+        </button>
+      </div>
+
+      <div class="filter-box" style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
+        <h3 style="font-size: 0.95rem; margin-bottom: 12px; color: #026685;">Filter Laporan Transaksi</h3>
+        <div class="form-row">
+          <div class="form-group" id="filter-branch-group">
+            <label for="filter-branch">Cabang</label>
+            <select id="filter-branch">
+              <option value="ALL">-- Semua Cabang --</option>
+              <option value="Cabang 1">Cabang 1</option>
+              <option value="Cabang 2">Cabang 2</option>
+              <option value="Cabang 3">Cabang 3</option>
+              <option value="Cabang 4">Cabang 4</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="filter-search">Cari Nama / Kode Barang</label>
+            <input type="text" id="filter-search" name="search_item_query" autocomplete="off" placeholder="Ketik nama atau kode barang...">
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 10px;">
+          <div class="form-group">
+            <label for="filter-start-date">Dari Tanggal</label>
+            <input type="date" id="filter-start-date">
+          </div>
+          <div class="form-group">
+            <label for="filter-end-date">Sampai Tanggal</label>
+            <input type="date" id="filter-end-date">
+          </div>
+          <div class="form-group" style="justify-content: flex-end;">
+            <button type="button" id="btn-reset-filter" class="btn-secondary">Reset Filter</button>
+          </div>
+        </div>
+      </div>
+
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Cabang</th>
+            <th>Nama Barang</th>
+            <th>Qty</th>
+            <th>Harga Satuan</th>
+            <th>Total Transaksi</th>
+          </tr>
+        </thead>
+        <tbody id="transaction-list"></tbody>
+      </table>
+    </div>
+
+    <!-- TAB 4: LOG AUDIT (Khusus Admin) -->
+    <div id="tab-logs" class="tab-content">
+      <h2>Log Audit / Riwayat Perubahan Data</h2>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Waktu (Tgl & Jam)</th>
+            <th>Admin / User</th>
+            <th>Aksi</th>
+            <th>Barang</th>
+            <th>Rincian Perubahan</th>
+          </tr>
+        </thead>
+        <tbody id="log-list"></tbody>
+      </table>
+    </div>
+
+    <!-- TAB 5: DAFTAR USER (Khusus Admin) -->
+    <div id="tab-users" class="tab-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+        <h2>Daftar Pengguna & Hak Akses</h2>
+        <button type="button" id="btn-open-user-modal">+ Tambah User Cabang</button>
+      </div>
+
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Email User</th>
+            <th>Role / Peran</th>
+            <th>Status Akses</th>
+            <th>Aksi Admin</th>
+          </tr>
+        </thead>
+        <tbody id="user-list"></tbody>
+      </table>
+    </div>
+
+    <!-- Modal Form Tambah User -->
+    <div id="user-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+      <div style="background: #fff; padding: 25px; border-radius: 8px; width: 100%; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+        <h3 style="margin-bottom: 15px; color: #026685;">Tambah Akun Cabang Baru</h3>
+        <form id="create-user-form" style="padding: 0; border: none; background: transparent; margin: 0;">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label for="new-user-email">Email Cabang</label>
+            <input type="email" id="new-user-email" placeholder="cabang5@inventori.com" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="new-user-branch">Nama Cabang</label>
+            <input type="text" id="new-user-branch" placeholder="Cabang 5" required>
+          </div>
+          <div class="form-buttons" style="justify-content: flex-end; gap: 10px;">
+            <button type="button" id="btn-close-user-modal" class="btn-secondary">Batal</button>
+            <button type="submit">Simpan User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
